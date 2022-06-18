@@ -86,7 +86,7 @@ function deleteUserById($id)
 {
     global $conn;
     $sql = "DELETE FROM users WHERE id = '$id'";
-    if (!mysqli_query($conn, $sql)) echo 'Erro ao atualizar usuário!';
+    if (!mysqli_query($conn, $sql)) echo 'Erro ao deletar usuário!';
     header("Content-Type: application/json; charset=UTF-8");
 }
 
