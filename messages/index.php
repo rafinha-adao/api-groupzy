@@ -38,7 +38,7 @@ function createMessage()
 {
     global $conn;
     $content    = $_POST['content'];
-    $date       = date("Y-m-d");
+    $date       = date('Y-m-d h:i:s');
     $idUser     = $_POST['idUser'];
     $idGroup    = $_POST['idGroup'];
 
