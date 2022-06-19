@@ -1,6 +1,7 @@
 <?php
 include('db.php');
 header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Origin: *");
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         login($_GET['email'], $_GET['pass']);
