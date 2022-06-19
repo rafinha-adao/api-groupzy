@@ -17,7 +17,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 function getAllMessagesByGroup($idGroup, $limit)
 {
     global $conn;
-    $sql = "SELECT * FROM messages WHERE idGroup = '$idGroup' LIMIT '$limit'";
+    $sql = "SELECT * FROM messages WHERE idGroup = '$idGroup' LIMIT $limit";
     $result = mysqli_query($conn, $sql);
     $res = array();
     $x   = 0;
