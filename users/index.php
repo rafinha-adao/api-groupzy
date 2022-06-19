@@ -57,7 +57,25 @@ function createUser()
     $pass       = $_POST['pass'];
     $sql = "INSERT INTO users(name, tagName, birthday, bio, email, pass)
                 VALUES('$name', '$tagName', '$birthday', '$bio', '$email', '$pass')";
-    if (!mysqli_query($conn, $sql)) echo 'Erro ao adicionar usuário!';
+    if (mysqli_query($conn, $sql)) {
+        $res = array(
+            'status'            => 1,
+            'status_message'    => 'Usuário criado com sucesso.',
+            'user' => array(
+                'name'          => $_POST['name'],
+                'tagName'       => $_POST['tagName'],
+                'bio'           => $_POST['bio'],
+                'email'         => $_POST['email']
+            )
+        );
+    } else {
+        $res = array(
+            'status' => 0,
+            'status_message' => 'Erro ao adicionar usuário!',
+            'error' => mysqli_error($conn)
+        );
+    }
+    echo json_encode($res);
 }
 
 function getUserById($id)
