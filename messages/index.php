@@ -4,7 +4,7 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        getAllMessagesByGroup($_GET['id']);
+        getAllMessagesByGroup($_GET['idGroup'], $_GET['limit']);
         break;
     case 'POST':
         createMessage();
@@ -14,10 +14,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 }
 
-function getAllMessagesByGroup($idGroup)
+function getAllMessagesByGroup($idGroup, $limit)
 {
     global $conn;
-    $sql = "SELECT * FROM messages WHERE idGroup = '$idGroup'";
+    $sql = "SELECT * FROM messages WHERE idGroup = '$idGroup' LIMIT '$limit'";
     $result = mysqli_query($conn, $sql);
     $res = array();
     $x   = 0;
