@@ -31,7 +31,7 @@ function login($email, $pass)
         $res = array(
             'status' => 1,
             'status_message' => 'Login efetuado com sucesso!',
-            'user' => $user
+            'user' => json_encode($user)
         );
     } else {
         $res = array(
