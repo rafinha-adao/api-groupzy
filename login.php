@@ -17,17 +17,14 @@ function login($email, $pass)
     $sql = "SELECT * FROM users WHERE email = '$email' AND pass = '$pass'";
     $result = mysqli_query($conn, $sql);
     $user = array();
-    $x   = 0;
     while ($row = mysqli_fetch_array($result)) {
-        $user[$x]['id']          = $row['id'];
-        $user[$x]['name']        = $row['name'];
-        $user[$x]['tagName']     = $row['tagName'];
-        $user[$x]['birthday']    = $row['birthday'];
-        $user[$x]['bio']         = $row['bio'];
-        $user[$x]['email']       = $row['email'];
-        $user[$x]['idGroup']     = $row['idGroup'];
-
-        $x++;
+        $user['id']          = $row['id'];
+        $user['name']        = $row['name'];
+        $user['tagName']     = $row['tagName'];
+        $user['birthday']    = $row['birthday'];
+        $user['bio']         = $row['bio'];
+        $user['email']       = $row['email'];
+        $user['idGroup']     = $row['idGroup'];
     }
     $row = mysqli_num_rows($result);
     if ($row == 1) {
