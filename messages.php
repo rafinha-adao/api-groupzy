@@ -17,7 +17,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
 function getAllMessagesByGroup($idGroup)
 {
     global $conn;
-    $sql = "SELECT * FROM messages WHERE idGroup = '$idGroup'";
+    $sql = "SELECT 
+            messages.id, messages.content, messages.date, messages.idUser, messages.idGroup, users.tagName
+            FROM messages 
+            INNER JOIN users 
+            ON messages.idUser = users.id
+            WHERE messages.idGroup = '$idGroup'";
     $result = mysqli_query($conn, $sql);
     $res = array();
     $x   = 0;
@@ -27,6 +32,7 @@ function getAllMessagesByGroup($idGroup)
         $res[$x]['date']        = $row['date'];
         $res[$x]['idUser']      = $row['idUser'];
         $res[$x]['idGroup']     = $row['idGroup'];
+        $res[$x]['tagName']     = $row['tagName'];
 
         $x++;
     }

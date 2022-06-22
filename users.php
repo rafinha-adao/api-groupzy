@@ -4,15 +4,17 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        if (!empty($_GET['id'])) {
-            getUserById($_GET['id']);
+        if (!empty($_GET['idUser'])) {
+            getUserById($_GET['idUser']);
         } else {
             getAllUsers();
         }
         break;
     case 'POST':
-        if (!empty($_GET['id'])) {
-            updateUserById($_GET['id']);
+        if(!empty($_GET['idUser'])) {
+            updateUserById($_GET['idUser']);
+        } else if(!empty($_GET['idUser']) && !empty($_GET['idGroup'])) {
+            enterGroup($_GET['idUser'], $_GET['idGroup']);
         } else {
             createUser();
         }
@@ -80,10 +82,10 @@ function createUser()
     echo json_encode($res);
 }
 
-function getUserById($id)
+function getUserById($idUser)
 {
     global $conn;
-    $sql = "SELECT * FROM users WHERE id = '$id' LIMIT 1";
+    $sql = "SELECT * FROM users WHERE id = '$idUser' LIMIT 1";
     $result = mysqli_query($conn, $sql);
     $res = array();
     $x   = 0;
@@ -102,15 +104,15 @@ function getUserById($id)
     echo json_encode($res);
 }
 
-function deleteUserById($id)
+function deleteUserById($idUser)
 {
     global $conn;
-    $sql = "DELETE FROM users WHERE id = '$id'";
+    $sql = "DELETE FROM users WHERE id = '$idUser'";
     if (!mysqli_query($conn, $sql)) echo 'Erro ao deletar usuário!';
     header("Content-Type: application/json; charset=UTF-8");
 }
 
-function updateUserById($id)
+function updateUserById($idUser)
 {
     global $conn;
     $name       = $_POST['name'];
@@ -123,8 +125,14 @@ function updateUserById($id)
 
     $sql = "INSERT INTO users(name, tagName, birthday, bio, email, pass, idGroup)
                 VALUES('$name', '$tagName', '$birthday', '$bio', '$email', '$pass', $idGroup)
-                    WHERE id = '$id'";
+                    WHERE id = '$idUser'";
     if (!mysqli_query($conn, $sql)) echo 'Erro ao atualizar usuário!';
+}
+
+function enterGroup($idUser, $idGroup) {
+    global $conn;
+    $sql = "INSERT INTO users(idGroup) VALUES($idGroup) WHERE id = '$idUser'";
+    if (!mysqli_query($conn, $sql)) echo 'Erro ao entrar em grupo!';
 }
 
 mysqli_close($conn);
