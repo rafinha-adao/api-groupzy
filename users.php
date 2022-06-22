@@ -131,7 +131,7 @@ function updateUserById($idUser)
 
 function enterGroup($idUser, $idGroup) {
     global $conn;
-    $sql = "INSERT INTO users(idGroup) VALUES($idGroup) WHERE id = '$idUser'";
+    $sql = "INSERT INTO users(idGroup) VALUES('$idGroup') WHERE id = '$idUser'";
     if (!mysqli_query($conn, $sql)) echo 'Erro ao entrar em grupo!';
 }
 
