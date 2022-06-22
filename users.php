@@ -59,14 +59,14 @@ function createUser()
     $email      = $_POST['email'];
     $pass       = $_POST['pass'];
     $sql = "INSERT INTO users(name, tagName, birthday, bio, email, pass, idGroup)
-                VALUES('$name', '$tagName', '$birthday', '$bio', '$email', '$pass', 1)";
+                VALUES('$name', '$tagName', '$birthday', '$bio', '$email', '$pass', '1')";
     if (mysqli_query($conn, $sql)) {
         $user = array(
             'name'      => $_POST['name'],
             'tagName'   => $_POST['tagName'],
             'bio'       => $_POST['bio'],
             'email'     => $_POST['email'],
-            'idGroup'   => 1 // FOR TEST
+            'idGroup'   => '1' // FOR TEST
         );
         $res = array(
             'status'            => 1,
