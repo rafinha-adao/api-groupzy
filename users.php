@@ -13,7 +13,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':
         if(!empty($_GET['idUser'])) {
             updateUserById($_GET['idUser']);
-        } else if(!empty($_GET['idUser']) && !empty($_GET['idGroup'])) {
+        } else if(!empty($_GET['idGroup'])) {
             enterGroup($_GET['idUser'], $_GET['idGroup']);
         } else {
             createUser();
@@ -131,7 +131,7 @@ function updateUserById($idUser)
 
 function enterGroup($idUser, $idGroup) {
     global $conn;
-    $sql = "INSERT INTO users(idGroup) VALUES('$idGroup') WHERE id = '$idUser'";
+    $sql = "INSERT INTO users(idGroup) VALUES($idGroup) WHERE id = '$idUser'";
     if (!mysqli_query($conn, $sql)) echo 'Erro ao entrar em grupo!';
 }
 
