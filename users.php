@@ -58,8 +58,8 @@ function createUser()
     $bio        = $_POST['bio'];
     $email      = $_POST['email'];
     $pass       = $_POST['pass'];
-    $sql = "INSERT INTO users(name, tagName, birthday, bio, email, pass)
-                VALUES('$name', '$tagName', '$birthday', '$bio', '$email', '$pass')";
+    $sql = "INSERT INTO users(name, tagName, birthday, bio, email, pass, idGroup)
+                VALUES('$name', '$tagName', '$birthday', '$bio', '$email', '$pass', 1)";
     if (mysqli_query($conn, $sql)) {
         $user = array(
             'name'      => $_POST['name'],
