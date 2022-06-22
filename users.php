@@ -66,7 +66,7 @@ function createUser()
             'tagName'   => $_POST['tagName'],
             'bio'       => $_POST['bio'],
             'email'     => $_POST['email'],
-            'idGroup'   => $_POST['idGroup']
+            'idGroup'   => 1 // FOR TEST
         );
         $res = array(
             'status'            => 1,
@@ -130,6 +130,7 @@ function updateUserById($idUser)
     if (!mysqli_query($conn, $sql)) echo 'Erro ao atualizar usuário!';
 }
 
+// NOT WORKING
 function enterGroup($idUser, $idGroup) {
     global $conn;
     $sql = "INSERT INTO users(idGroup) VALUES($idGroup) WHERE id = '$idUser'";
