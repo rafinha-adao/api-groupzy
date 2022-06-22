@@ -22,7 +22,8 @@ function getAllMessagesByGroup($idGroup)
             FROM messages 
             INNER JOIN users 
             ON messages.idUser = users.id
-            WHERE messages.idGroup = '$idGroup'";
+            WHERE messages.idGroup = '$idGroup'
+            ORDER BY messages.id";
     $result = mysqli_query($conn, $sql);
     $res = array();
     $x   = 0;
