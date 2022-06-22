@@ -20,7 +20,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
     case 'DELETE':
-        deleteUserById($_GET['id']);
+        deleteUserById($_GET['idUser']);
         break;
     default:
         header('HTTP/1.0 405 Method Not Allowed');
