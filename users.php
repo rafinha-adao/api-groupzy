@@ -65,7 +65,8 @@ function createUser()
             'name'      => $_POST['name'],
             'tagName'   => $_POST['tagName'],
             'bio'       => $_POST['bio'],
-            'email'     => $_POST['email']
+            'email'     => $_POST['email'],
+            'idGroup'   => $_POST['idGroup']
         );
         $res = array(
             'status'            => 1,
