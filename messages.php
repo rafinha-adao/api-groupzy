@@ -17,16 +17,22 @@ switch ($_SERVER['REQUEST_METHOD']) {
 function getAllMessagesByGroup($idGroup)
 {
     global $conn;
-    $sql = "SELECT 
-            messages.id, messages.content, messages.date, messages.idUser, messages.idGroup, users.tagName
-            FROM messages 
-            INNER JOIN users 
-            ON messages.idUser = users.id
-            WHERE messages.idGroup = '$idGroup'
-            ORDER BY messages.id";
+    $sql    = "SELECT
+                messages.id,
+                messages.content,
+                messages.date,
+                messages.idUser,
+                messages.idGroup,
+                users.tagName
+                FROM messages
+                INNER JOIN users
+                ON messages.idUser = users.id
+                WHERE messages.idGroup = '$idGroup'
+                ORDER BY messages.id
+    ";
     $result = mysqli_query($conn, $sql);
-    $res = array();
-    $x   = 0;
+    $res    = array();
+    $x      = 0;
     while ($row = mysqli_fetch_array($result)) {
         $res[$x]['id']          = $row['id'];
         $res[$x]['content']     = $row['content'];
@@ -49,8 +55,20 @@ function createMessage()
     $idUser     = $_POST['idUser'];
     $idGroup    = $_POST['idGroup'];
 
-    $sql = "INSERT INTO messages(content, date, idUser, idGroup)
-                VALUES('$content', '$date', '$idUser', '$idGroup')";
+    $sql        = "INSERT INTO
+                    messages(
+                        content,
+                        date,
+                        idUser,
+                        idGroup
+                    )
+                    VALUES(
+                        '$content',
+                        '$date',
+                        '$idUser',
+                        '$idGroup'
+                    )
+    ";
     if (!mysqli_query($conn, $sql)) echo 'Erro ao enviar mensagem!';
 }
 

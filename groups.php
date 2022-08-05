@@ -4,18 +4,10 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        if (!empty($_GET['id'])) {
-            getGroupById($_GET['id']);
-        } else {
-            getAllGroups();
-        }
+        (!empty($_GET['id'])) ? getGroupById($_GET['id']) : getAllGroups();
         break;
     case 'POST':
-        if (!empty($_GET['id'])) {
-            updateGroupById($_GET['id']);
-        } else {
-            createGroup();
-        }
+        (!empty($_GET['id'])) ? updateGroupById($_GET['id']) : createGroup();
         break;
     case 'DELETE':
         deleteGroupById($_GET['id']);
@@ -28,10 +20,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
 function getAllGroups()
 {
     global $conn;
-    $sql = "SELECT * FROM groups";
+    $sql    = "SELECT * FROM groups";
     $result = mysqli_query($conn, $sql);
-    $res = array();
-    $x   = 0;
+    $res    = array();
+    $x      = 0;
     while ($row = mysqli_fetch_array($result)) {
         $res[$x]['id']          = $row['id'];
         $res[$x]['name']        = $row['name'];

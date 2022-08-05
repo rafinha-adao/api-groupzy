@@ -14,9 +14,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
 function login($email, $pass)
 {
     global $conn;
-    $sql = "SELECT * FROM users WHERE email = '$email' AND pass = '$pass'";
+    $sql    = "SELECT * FROM users WHERE email = '$email' AND pass = '$pass'";
     $result = mysqli_query($conn, $sql);
-    $user = array();
+    $user   = array();
     while ($row = mysqli_fetch_array($result)) {
         $user['id']          = $row['id'];
         $user['name']        = $row['name'];
@@ -29,14 +29,14 @@ function login($email, $pass)
     $row = mysqli_num_rows($result);
     if ($row == 1) {
         $res = array(
-            'status' => 1,
-            'status_message' => 'Login efetuado com sucesso!',
-            'user' => json_encode($user)
+            'status'            => 1,
+            'status_message'    => 'Login efetuado com sucesso!',
+            'user'              => json_encode($user)
         );
     } else {
         $res = array(
-            'status' => 0,
-            'status_message' => 'Erro ao efetuar login!'
+            'status'            => 0,
+            'status_message'    => 'Erro ao efetuar login!'
         );
     }
     echo json_encode($res);
