@@ -7,7 +7,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         (!empty($_GET['idUser'])) ? getUserById($_GET['idUser']) : getAllUsers();
         break;
     case 'POST':
-        if (!empty($_GET['idUser'])) {
+        if (!empty($_GET['idUser']) && empty($_GET['idGroup'])) {
             updateUserById($_GET['idUser']);
         } else if(!empty($_GET['idGroup'])) {
             enterGroup($_GET['idUser'], $_GET['idGroup']);
@@ -171,7 +171,7 @@ function updateUserById($idUser)
     if (!mysqli_query($conn, $sql)) echo 'Erro ao atualizar usuário!';
 }
 
-// NOT WORKING
+/*
 function enterGroup($idUser, $idGroup)
 {
     global $conn;
@@ -188,5 +188,6 @@ function enterGroup($idUser, $idGroup)
     ";
     if (!mysqli_query($conn, $sql)) echo 'Erro ao entrar em grupo!';
 }
+*/
 
 mysqli_close($conn);
