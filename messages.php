@@ -9,6 +9,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':
         createMessage();
         break;
+    case 'DELETE':
+        deleteAllMessages();
+        break;
     default:
         header('HTTP/1.0 405 Method Not Allowed');
         break;
@@ -70,6 +73,13 @@ function createMessage()
                     )
     ";
     if (!mysqli_query($conn, $sql)) echo 'Erro ao enviar mensagem!';
+}
+
+function deleteAllMessages()
+{
+    global $conn;
+    $sql = "DELETE FROM messages WHERE idGroup = '1'";
+    if (!mysqli_query($conn, $sql)) echo 'Erro ao apagar mensagens!';
 }
 
 mysqli_close($conn);

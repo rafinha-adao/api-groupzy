@@ -130,7 +130,7 @@ function deleteUserById($idUser)
             users
             WHERE id = '$idUser'
     ";
-    if (!mysqli_query($conn, $sql)) echo 'Erro ao deletar usuário!';
+    if (!mysqli_query($conn, $sql)) echo 'Erro ao remover usuário!';
     header("Content-Type: application/json; charset=UTF-8");
 }
 
