@@ -16,7 +16,7 @@
         <ul>
             <li><a href="./users.php">Usuários</a></li>
             <li><a href="./groups.php">Grupos</a></li>
-            <li><button onclick="$.ajax({type:'DELETE',url:'https:/\/api-groupzy.herokuapp.com/groups.php/',success:function(res){window.location='./index.php'}});">Apagar mensagens (Grupo teste)</button></li>
+            <li><button style="cursor:pointer;" onclick="$.ajax({type:'DELETE',url:'https:/\/api-groupzy.herokuapp.com/messages.php/',success:function(res){window.location='./index.php'}});">Apagar mensagens (Grupo teste)</button></li>
         </ul>
     </main>
 </body>
