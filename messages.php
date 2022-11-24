@@ -4,7 +4,7 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        getAllMessagesByGroup($_GET['idGroup']);
+        (!empty($_GET['idMessage'])) ? deleteMessageById($_GET['idMessage']) : getAllMessagesByGroup($_GET['idGroup']);
         break;
     case 'POST':
         createMessage();
@@ -79,6 +79,13 @@ function deleteAllMessages()
 {
     global $conn;
     $sql = "DELETE FROM messages WHERE idGroup = '1'";
+    if (!mysqli_query($conn, $sql)) echo 'Erro ao apagar mensagens!';
+}
+
+function deleteMessageById($idMessage)
+{
+    global $conn;
+    $sql = "DELETE FROM messages WHERE id = '$idMessage'";
     if (!mysqli_query($conn, $sql)) echo 'Erro ao apagar mensagens!';
 }
 
