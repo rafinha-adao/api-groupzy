@@ -26,7 +26,7 @@ function getAllGroups()
     $x      = 0;
     while ($row = mysqli_fetch_array($result)) {
         $res[$x]['id']          = $row['id'];
-        $res[$x]['name']        = $row['name'];
+        $res[$x]['title']       = $row['title'];
         $res[$x]['description'] = $row['description'];
         $res[$x]['image']       = $row['image'];
         $res[$x]['idUser']      = $row['idUser'];
@@ -40,25 +40,25 @@ function getAllGroups()
 function createGroup()
 {
     global $conn;
-    $name           = $_POST['name'];
+    $title          = $_POST['title'];
     $description    = $_POST['description'];
     // FEAT: POST IMAGE
     $idUser         = $_POST['idUser'];
-    $sql = "INSERT INTO groups(name, description, idUser)
-                VALUES('$name', '$description', '$idUser')";
+    $sql = "INSERT INTO groups(title, description, idUser)
+                VALUES('$title', '$description', '$idUser')";
     if (!mysqli_query($conn, $sql)) echo 'Erro ao adicionar grupo!';
 }
 
 function getGroupById($id)
 {
     global $conn;
-    $sql = "SELECT * FROM groups WHERE id = '$id' LIMIT 1";
+    $sql    = "SELECT * FROM groups WHERE id = '$id' LIMIT 1";
     $result = mysqli_query($conn, $sql);
-    $res = array();
-    $x   = 0;
+    $res    = array();
+    $x      = 0;
     while ($row = mysqli_fetch_array($result)) {
         $res[$x]['id']          = $row['id'];
-        $res[$x]['name']        = $row['name'];
+        $res[$x]['title']       = $row['title'];
         $res[$x]['description'] = $row['description'];
         $res[$x]['image']       = $row['image'];
         $res[$x]['idUser']      = $row['idUser'];
@@ -80,13 +80,13 @@ function deleteGroupById($id)
 function updateGroupById($id)
 {
     global $conn;
-    $name           = $_POST['name'];
+    $title          = $_POST['title'];
     $description    = $_POST['description'];
     // FEAT: POST IMAGE
     $idUser         = $_POST['idUser'];
 
-    $sql = "INSERT INTO groups(name, description, idUser)
-                VALUES('$name', '$description', '$idUser')
+    $sql = "INSERT INTO groups(title, description, idUser)
+                VALUES('$title', '$description', '$idUser')
                     WHERE id = '$id'";
     if (!mysqli_query($conn, $sql)) echo 'Erro ao atualizar grupo!';
 }

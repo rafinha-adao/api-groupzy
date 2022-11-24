@@ -101,7 +101,7 @@ function getUserById($idUser)
 {
     global $conn;
     $sql    = "SELECT * FROM
-                users 
+                    users 
                 WHERE id = '$idUser'
                 LIMIT 1
     ";
@@ -116,6 +116,7 @@ function getUserById($idUser)
         $res[$x]['bio']         = $row['bio'];
         $res[$x]['email']       = $row['email'];
         $res[$x]['idGroup']     = $row['idGroup'];
+        $res[$x]['hasGroup']    = $row['hasGroup'];
 
         $x++;
     }
@@ -139,39 +140,31 @@ function updateUserById($idUser)
     global $conn;
     $name       = $_POST['name'];
     $tagName    = $_POST['tagName'];
-    $birthday   = $_POST['birthday'];
     $bio        = $_POST['bio'];
-    $email      = $_POST['email'];
     $pass       = $_POST['pass'];
-    $idGroup    = $_POST['idGroup'];
 
-    $sql = "INSERT INTO
-            users
-            (
-                name,
-                tagName,
-                birthday,
-                bio,
-                email,
-                pass,
-                idGroup
-            )
-            VALUES
-            (
-                '$name',
-                '$tagName',
-                '$birthday',
-                '$bio',
-                '$email',
-                '$pass',
-                $idGroup
-            )
-            WHERE id = '$idUser'
+    $sql = "UPDATE users SET
+                name    = '$name',
+                tagName = '$tagName',
+                bio     = '$bio',
+                pass    = '$pass'
+            WHERE id = $idUser
     ";
-    if (!mysqli_query($conn, $sql)) echo 'Erro ao atualizar usuário!';
+    if (mysqli_query($conn, $sql)) {
+        $res = array(
+            'status'            => 1,
+            'status_message'    => 'Usuário criado com sucesso.',
+        );
+    } else {
+        $res = array(
+            'status'            => 0,
+            'status_message'    => 'Erro ao atualizar usuário!',
+            'error'             => mysqli_error($conn)
+        );
+    }
+    echo json_encode($res);
 }
 
-/*
 function enterGroup($idUser, $idGroup)
 {
     global $conn;
@@ -182,12 +175,11 @@ function enterGroup($idUser, $idGroup)
             )
             VALUES
             (
-                $idGroup
+                '$idGroup'
             )
             WHERE id = '$idUser'
     ";
     if (!mysqli_query($conn, $sql)) echo 'Erro ao entrar em grupo!';
 }
-*/
 
 mysqli_close($conn);

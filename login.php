@@ -18,13 +18,15 @@ function login($email, $pass)
     $result = mysqli_query($conn, $sql);
     $user   = array();
     while ($row = mysqli_fetch_array($result)) {
-        $user['id']          = $row['id'];
-        $user['name']        = $row['name'];
-        $user['tagName']     = $row['tagName'];
-        $user['birthday']    = $row['birthday'];
-        $user['bio']         = $row['bio'];
-        $user['email']       = $row['email'];
-        $user['idGroup']     = $row['idGroup'];
+        $user['id']         = $row['id'];
+        $user['name']       = $row['name'];
+        $user['tagName']    = $row['tagName'];
+        $user['birthday']   = $row['birthday'];
+        $user['bio']        = $row['bio'];
+        $user['email']      = $row['email'];
+        $user['idGroup']    = $row['idGroup'];
+        $user['hasGroup']   = $row['hasGroup'];
+        $user['pass']       = $row['pass'];
     }
     $row = mysqli_num_rows($result);
     if ($row == 1) {
