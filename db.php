@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
-$user = 'id20253877_groupzy_user';
-$pass = '6J2f$[Wk3^R5)P#h';
-$db   = 'id20253877_groupzy';
+$user = 'u110519718_groupzy';
+$pass = 'y4Yu!|S@@L';
+$db   = 'u110519718_groupzy';
 $conn = new mysqli($host, $user, $pass, $db);
 if (!$conn) die('Falha na conexão: ' . mysqli_connect_error());
